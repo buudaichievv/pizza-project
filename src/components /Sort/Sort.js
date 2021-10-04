@@ -11,6 +11,12 @@ export default function Sort() {
       setBtn(false)
     }
   }
+
+  let sort = ["популярности","цене","алфавиту"] 
+  let [sortItem,setSortItem] = useState(null) 
+  let sortActive = (index) =>{
+    setSortItem(index)
+  }
     return (
         <div>
              <div className="sort">
@@ -39,9 +45,20 @@ export default function Sort() {
                 }
                 )}>
                 <ul>
-                  <li className="active">популярности</li>
-                  <li>цене</li>
-                  <li>алфавиту</li>
+                  { sort ?
+                    sort.map((el,index)=>{
+                    return(
+                      <li 
+                      key={`${el}_${index}`}
+                      onClick={()=>{sortActive(index)}}
+                      className={`${sortItem === index ? 'active':''}`}
+                      >
+                        {el}
+                      </li>
+                    )
+                  })
+                    : <li>ОШИБКА</li>
+                  }
                 </ul>
               </div>
             </div>
